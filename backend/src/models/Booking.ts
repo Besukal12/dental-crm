@@ -1,6 +1,3 @@
-// src/models/Booking.ts
-// Booking requests submitted from the clinic website
-
 import { Schema, model, Document, Types } from "mongoose";
 
 export interface IBooking extends Document {
@@ -21,15 +18,15 @@ export interface IBooking extends Document {
 
 const bookingSchema = new Schema<IBooking>(
   {
-    // Visitor details (they may not be a registered patient yet)
+    // Visitor details 
     name: { type: String, required: true, trim: true },
     email: { type: String, required: true, trim: true, lowercase: true },
     phone: { type: String, trim: true },
 
     // What they're requesting
     preferredDate: { type: Date },
-    preferredTime: { type: String, trim: true }, // e.g. "10:00 AM"
-    serviceType: { type: String, trim: true },   // e.g. "Cleaning", "X-Ray"
+    preferredTime: { type: String, trim: true }, 
+    serviceType: { type: String, trim: true }, 
     message: { type: String, trim: true },
 
     // Clinic staff updates this after reviewing
@@ -39,7 +36,6 @@ const bookingSchema = new Schema<IBooking>(
       default: "pending",
     },
 
-    // Optionally link to an existing patient record
     patientId: {
       type: Schema.Types.ObjectId,
       ref: "Patient",
