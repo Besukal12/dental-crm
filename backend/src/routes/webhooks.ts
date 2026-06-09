@@ -1,22 +1,11 @@
-// src/routes/webhooks.ts
-// Handles incoming webhook events from Clerk (user sign up, deletion, etc.)
-// Base URL: /api/webhooks
-//
-// HOW TO SET UP:
-// 1. Go to your Clerk dashboard → Webhooks
-// 2. Add endpoint: https://your-backend-url/api/webhooks/clerk
-// 3. Copy the signing secret into CLERK_WEBHOOK_SECRET in .env
-
 import { Router, Request, Response } from "express";
 import { Webhook } from "svix";
 
 const router = Router();
 
-// NOTE: This route needs the raw request body for signature verification.
-// We use express.raw() only here — the rest of the app uses express.json().
 router.post(
   "/clerk",
-  express_raw(), // see server.ts — we pass raw middleware inline
+  express_raw(), 
   async (req: Request, res: Response) => {
     const secret = process.env.CLERK_WEBHOOK_SECRET;
 
@@ -46,7 +35,6 @@ router.post(
       case "user.created": {
         const emails = data.email_addresses as Array<{ email_address: string }>;
         console.log("New Clerk user:", emails?.[0]?.email_address);
-        // You could create a staff record here, send a welcome email, etc.
         break;
       }
 
@@ -62,7 +50,6 @@ router.post(
   }
 );
 
-// Small helper so we don't import express twice — imported in server.ts
 import express from "express";
 function express_raw() {
   return express.raw({ type: "application/json" });
