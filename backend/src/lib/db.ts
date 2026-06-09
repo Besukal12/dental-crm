@@ -1,6 +1,3 @@
-// src/lib/db.ts
-// MongoDB connection using Mongoose — called once at server startup
-
 import mongoose from "mongoose";
 
 export async function connectDB(): Promise<void> {
@@ -15,6 +12,6 @@ export async function connectDB(): Promise<void> {
     console.log("MongoDB connected ✓");
   } catch (error) {
     console.error("MongoDB connection failed:", (error as Error).message);
-    process.exit(1); // Stop the server if DB connection fails
+    process.exit(1);
   }
 }
