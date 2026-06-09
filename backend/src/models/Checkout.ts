@@ -1,7 +1,3 @@
-// src/models/Checkout.ts
-// Checkout records — one document per patient visit.
-// Each record stores the service, visit date, invoice amount, and the amount paid for that specific checkup.
-
 import { Schema, model, Document, Types } from "mongoose";
 
 export type PaymentStatus = "unpaid" | "partial" | "paid";
@@ -37,7 +33,7 @@ const checkoutSchema = new Schema<ICheckout>(
     patientEmail: { type: String, required: true },
 
     appointmentDate: { type: Date, required: true },
-    serviceProvided: { type: String, trim: true }, // e.g. "Root Canal", "Cleaning"
+    serviceProvided: { type: String, trim: true }, 
 
     // Billing for this specific visit
     invoiceAmount: { type: Number, default: 0 },
@@ -56,7 +52,6 @@ const checkoutSchema = new Schema<ICheckout>(
     emailSent: { type: Boolean, default: false },
     emailSentAt: { type: Date },
 
-    // Follow-up
     nextAppointmentDate: { type: Date },
     followUpNotes: { type: String, trim: true },
   },
