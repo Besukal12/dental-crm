@@ -25,10 +25,8 @@ const contactSchema = new Schema<IContact>(
     subject: { type: String, trim: true },
     message: { type: String, required: true, trim: true },
 
-    // Staff marks this true after reading the message
     isRead: { type: Boolean, default: false },
 
-    // Optional — track if/when a reply was sent
     repliedAt: { type: Date },
     replyMessage: { type: String, trim: true },
   },
