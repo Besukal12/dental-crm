@@ -1,6 +1,3 @@
-// src/models/Post.ts
-// Blog posts published on the clinic website
-
 import { Schema, model, Document, Types } from "mongoose";
 
 export interface IPost extends Document {
@@ -23,9 +20,9 @@ const postSchema = new Schema<IPost>(
     title: { type: String, required: true, trim: true },
     slug: { type: String, required: true, unique: true, trim: true },
     content: { type: String, required: true },
-    excerpt: { type: String, trim: true },    // Short summary shown on listing pages
-    coverImage: { type: String, trim: true }, // URL to a cover image
-    authorId: { type: String, trim: true },   // Clerk user ID
+    excerpt: { type: String, trim: true },   
+    coverImage: { type: String, trim: true },
+    authorId: { type: String, trim: true }, 
     authorName: { type: String, trim: true },
     status: {
       type: String,
@@ -37,7 +34,7 @@ const postSchema = new Schema<IPost>(
   { timestamps: true }
 );
 
-// Auto-generate slug from title if one isn't provided
+// auto generate slug
 postSchema.pre("save", function (this: IPost) {
   if (!this.slug && this.title) {
     this.slug = this.title
