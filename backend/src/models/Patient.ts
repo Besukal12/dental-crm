@@ -1,8 +1,5 @@
 import { Schema, model, Document, Types } from "mongoose";
 
-// ─── TypeScript Interface ─────────────────────────────────────────────────────
-// This gives you full type safety when working with patient documents
-
 export interface IPatient extends Document {
   _id: Types.ObjectId;
   name: string;
@@ -18,8 +15,6 @@ export interface IPatient extends Document {
   updatedAt: Date;
 }
 
-// ─── Mongoose Schema ──────────────────────────────────────────────────────────
-
 const patientSchema = new Schema<IPatient>(
   {
     name: { type: String, required: true, trim: true },
@@ -32,7 +27,7 @@ const patientSchema = new Schema<IPatient>(
       default: "male",
     },
     address: { type: String, trim: true },
-    notes: { type: String, trim: true }, // Medical notes — visible to staff only
+    notes: { type: String, trim: true }, 
     status: {
       type: String,
       enum: ["active", "inactive"],
@@ -41,7 +36,7 @@ const patientSchema = new Schema<IPatient>(
     lastVisit: { type: Date },
   },
   {
-    timestamps: true, // adds createdAt + updatedAt automatically
+    timestamps: true, 
   },
 );
 
